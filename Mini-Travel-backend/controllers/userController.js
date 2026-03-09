@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken'; // Add this import
 import User from '../models/user.js';
 
 // --- 1. User Registration ---
@@ -6,25 +7,20 @@ export const registerUser = async (req, res) => {
     try {
         const { firstName, lastName, username, email, password, confirmPassword } = req.body;
 
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: "Passwords do not match!" });
+        }
 
-        // Check if email already exists
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
             return res.status(400).json({ message: "Email is already registered" });
         }
 
-        // Check if passwords match
-        if (password !== confirmPassword) {
-            return res.status(400).json({ message: "Passwords do not match!" });
-        }
-
-        // Check if username already exists
         const existingUsername = await User.findOne({ username });
         if (existingUsername) {
             return res.status(400).json({ message: "Username is already taken" });
         }
 
-        // Password Encryption
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -40,7 +36,6 @@ export const registerUser = async (req, res) => {
         res.status(201).json({ message: "User registered successfully!" });
 
     } catch (err) {
-        // Handle MongoDB unique index errors
         if (err.code === 11000) {
             const field = Object.keys(err.keyValue)[0];
             return res.status(400).json({ message: `${field} already exists!` });
@@ -49,7 +44,7 @@ export const registerUser = async (req, res) => {
     }
 };
 
-// --- 2. User Login ---
+// --- 2. User Login (Updated with JWT Token) ---
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -59,15 +54,26 @@ export const loginUser = async (req, res) => {
             return res.status(404).json({ message: "User not found!" });
         }
 
-        // Compare hashed passwords
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ message: "Invalid credentials!" });
         }
 
+        // Generate Token using JWT_SECRET from your .env
+        const token = jwt.sign(
+            { id: user._id }, 
+            process.env.JWT_SECRET, 
+            { expiresIn: '1d' }
+        );
+
         res.status(200).json({ 
             message: "Login successful!",
-            user: { id: user._id, username: user.username, email: user.email }
+            token, // Token is now included in response
+            user: { 
+                id: user._id, 
+                username: user.username, 
+                email: user.email 
+            }
         });
 
     } catch (err) {
