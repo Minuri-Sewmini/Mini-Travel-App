@@ -1,9 +1,13 @@
 import express from 'express';
-import { registerUser } from '../controllers/userController.js';
+// registerUser ekka loginUser function ekath import karaganna
+import { registerUser, loginUser } from '../controllers/userController.js';
 
 const router = express.Router();
 
-// Route for user registration
+// 1. Route for user registration
 router.post('/register', registerUser);
+
+// 2. Route for user login
+router.post('/login', loginUser);
 
 export default router;
