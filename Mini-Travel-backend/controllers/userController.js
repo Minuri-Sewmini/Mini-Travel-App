@@ -4,13 +4,18 @@ import User from '../models/user.js';
 // --- 1. User Registration ---
 export const registerUser = async (req, res) => {
     try {
-        const { firstName, lastName, username, email, password } = req.body;
+        const { firstName, lastName, username, email, password, confirmPassword } = req.body;
 
 
         // Check if email already exists
         const existingEmail = await User.findOne({ email });
         if (existingEmail) {
             return res.status(400).json({ message: "Email is already registered" });
+        }
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            return res.status(400).json({ message: "Passwords do not match!" });
         }
 
         // Check if username already exists
