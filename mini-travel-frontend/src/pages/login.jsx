@@ -27,11 +27,11 @@ const Login = () => {
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
 
             {/* --- Login Card --- */}
-            <div className="relative z-10 bg-white/[0.03] backdrop-blur-2xl p-10 md:p-14 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-[480px] border border-white/10">
+            <div className="relative z-10 bg-white/3 backdrop-blur-2xl p-10 md:p-14 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-120 border border-white/10">
                 
                 {/* Logo or Icon */}
                 <div className="flex justify-center mb-8">
-                    <div className="w-16 h-16 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 rotate-3">
+                    <div className="w-16 h-16 bg-linear-to-tr from-blue-600 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 rotate-3">
                         <span className="text-white font-black text-3xl italic tracking-tighter">T</span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ const Login = () => {
                     <div className="group flex flex-col">
                         <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Email Address</label>
                         <input 
-                            className="w-full p-5 bg-white/[0.05] border border-white/10 rounded-[1.5rem] text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/[0.08] transition-all duration-300" 
+                            className="w-full p-5 bg-white/5 border border-white/10 rounded-3xl text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/8 transition-all duration-300" 
                             type="email"  
                             placeholder="explorer@minitravel.com"
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
@@ -62,7 +62,7 @@ const Login = () => {
                             <label className="text-xs font-bold text-slate-500 uppercase tracking-[0.2em]">Password</label>
                         </div>
                         <input 
-                            className="w-full p-5 bg-white/[0.05] border border-white/10 rounded-[1.5rem] text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/[0.08] transition-all duration-300" 
+                            className="w-full p-5 bg-white/5 border border-white/10 rounded-3xl text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:bg-white/8 transition-all duration-300" 
                             type="password" 
                             placeholder="••••••••" 
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
@@ -72,7 +72,7 @@ const Login = () => {
 
                     {/* Submit Button */}
                     <button 
-                        className="relative w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5 rounded-[1.5rem] font-black text-lg shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300" 
+                        className="relative w-full mt-6 bg-linear-to-r from-blue-600 to-blue-500 text-white p-5 rounded-3xl font-black text-lg shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300" 
                         type="submit"
                     >
                         Sign In to Explore

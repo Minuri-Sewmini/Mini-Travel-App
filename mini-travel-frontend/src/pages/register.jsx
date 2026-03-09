@@ -46,7 +46,7 @@ const Register = () => {
             <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
 
             {/* --- Register Card --- */}
-            <div className="relative z-10 bg-white/[0.03] backdrop-blur-2xl p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border border-white/10">
+            <div className="relative z-10 bg-white/3 backdrop-blur-2xl p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border border-white/10">
                 
                 <div className="text-center mb-10">
                     <h2 className="text-4xl font-black text-white tracking-tight mb-3">
@@ -61,7 +61,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">First Name</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="text" 
                                 placeholder="John"
                                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} 
@@ -71,7 +71,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Last Name</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="text" 
                                 placeholder="Doe"
                                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} 
@@ -85,7 +85,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Username</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="text" 
                                 placeholder="johndoe123"
                                 onChange={(e) => setFormData({ ...formData, username: e.target.value })} 
@@ -95,7 +95,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Email Address</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="email" 
                                 placeholder="name@example.com"
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
@@ -109,7 +109,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Password</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="password" 
                                 placeholder="••••••••"
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
@@ -119,7 +119,7 @@ const Register = () => {
                         <div className="flex flex-col">
                             <label className="text-xs font-bold text-slate-500 mb-2 ml-4 uppercase tracking-[0.2em]">Confirm Password</label>
                             <input 
-                                className="w-full p-4 bg-white/[0.05] border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
+                                className="w-full p-4 bg-white/5 border border-white/10 rounded-2xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" 
                                 type="password" 
                                 placeholder="••••••••"
                                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })} 
@@ -129,7 +129,7 @@ const Register = () => {
                     </div>
 
                     <button 
-                        className="w-full mt-6 bg-gradient-to-r from-blue-600 to-blue-500 text-white p-5 rounded-2xl font-black text-lg shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300" 
+                        className="w-full mt-6 bg-linear-to-r from-blue-600 to-blue-500 text-white p-5 rounded-2xl font-black text-lg shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300" 
                         type="submit"
                     >
                         Create My Account

@@ -34,14 +34,14 @@ const Feed = () => {
     );
 
     return (
-        // පසුබිමට ලස්සන Gradient එකක් දුන්නා
-        <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] pb-20">
+        
+        <div className="min-h-screen bg-linear-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] pb-20">
             
             {/* --- Transparent Glass Navbar --- */}
             <nav className="sticky top-0 z-50 bg-white/5 backdrop-blur-xl border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 bg-gradient-to-tr from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <div className="w-10 h-10 bg-linear-to-tr from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
                             <span className="text-white font-black text-xl italic">T</span>
                         </div>
                         <span className="text-xl font-bold text-white tracking-tight">Mini<span className="text-blue-400">Travel</span></span>
@@ -62,7 +62,7 @@ const Feed = () => {
             {/* --- Hero Section --- */}
             <header className="pt-16 pb-12 px-6 text-center">
                 <h1 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">
-                    Find Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Dream</span> Escape
+                    Find Your <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">Dream</span> Escape
                 </h1>
                 <p className="text-slate-400 text-lg max-w-xl mx-auto">
                     Explore curated world-class experiences at your fingertips.
@@ -79,7 +79,7 @@ const Feed = () => {
                             className="group relative bg-white/5 backdrop-blur-sm rounded-[2.5rem] p-4 transition-all duration-500 hover:bg-white/10 border border-white/10 cursor-pointer shadow-2xl"
                         >
                             {/* Image Section */}
-                            <div className="relative h-64 rounded-[2rem] overflow-hidden mb-6">
+                            <div className="relative h-64 rounded-[4xl] overflow-hidden mb-6">
                                 <img 
                                     src={item.imageUrl} 
                                     alt={item.title} 
@@ -102,7 +102,7 @@ const Feed = () => {
                                 
                                 <div className="flex items-center justify-between border-t border-white/10 pt-5">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center border border-white/20 text-white text-xs font-bold">
+                                        <div className="w-8 h-8 rounded-full bg-linear-to-br from-slate-700 to-slate-900 flex items-center justify-center border border-white/20 text-white text-xs font-bold">
                                             {item.creatorName?.charAt(0)}
                                         </div>
                                         <span className="text-xs font-semibold text-slate-300">{item.creatorName}</span>
