@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 // Import your routes
 // Note: In ES Modules, you MUST include the .js extension for local files
 import userRoute from './routes/userRoute.js'; 
+import listingRoutes from './routes/listingRoutes.js'
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +26,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Use the user routes
 app.use('/api/users', userRoute);
+app.use('/api/listings', listingRoutes );
 
 // Basic Route for testing the API
 app.get('/', (req, res) => {
