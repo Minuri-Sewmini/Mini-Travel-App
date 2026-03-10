@@ -131,3 +131,27 @@ export const deleteListing = async (req, res) => {
         res.status(500).json({ message: "Error deleting: " + err.message });
     }
 };
+
+// --- 6. Search Listings by Title or Location ---
+export const searchListings = async (req, res) => {
+    try {
+        const { query } = req.query;
+        
+        if (!query) {
+            return res.status(200).json([]);
+        }
+
+        // Search using Regex (Case-insensitive)
+        const listings = await Listing.find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } },
+                { location: { $regex: query, $options: 'i' } },
+                { description: { $regex: query, $options: 'i' } }
+            ]
+        }).sort({ createdAt: -1 });
+
+        res.status(200).json(listings);
+    } catch (err) {
+        res.status(500).json({ message: "Search error: " + err.message });
+    }
+};
