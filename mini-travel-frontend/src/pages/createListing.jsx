@@ -38,7 +38,7 @@ const CreateListing = () => {
         try {
             const token = localStorage.getItem('token');
 
-            await API.post('/listings/create', data, {
+            await API.post('api/listings/create', data, {
                 headers: { 
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}` 

@@ -12,7 +12,7 @@ const ListingDetail = () => {
     useEffect(() => {
         const fetchListing = async () => {
             try {
-                const res = await API.get(`/listings/${id}`);
+                const res = await API.get(`api/listings/${id}`);
                 setListing(res.data);
                 setLoading(false);
             } catch (err) {

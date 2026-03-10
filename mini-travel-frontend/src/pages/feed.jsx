@@ -16,7 +16,7 @@ const Feed = () => {
             
             if(!query) setLoading(true);
 
-            const endpoint = query ? `/listings/search?query=${query}` : '/listings';
+            const endpoint = query ? `api/listings/search?query=${query}` : '/listings';
             const res = await API.get(endpoint);
             setListings(res.data);
             setLoading(false);
