@@ -3,73 +3,112 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
-        // Changed overflow-x-hidden to prevent unexpected horizontal scrolling
-        <div className="min-h-screen bg-slate-50 overflow-x-hidden">
+        <div className="min-h-screen bg-[#020617] overflow-x-hidden font-sans selection:bg-blue-500/30">
             
-            {/* --- Transparent & Floating Navbar --- */}
-            <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-5 flex justify-between items-center bg-transparent backdrop-blur-sm border-b border-white/10">
+            {/* --- Premium Glass Navbar --- */}
+            <nav className="fixed top-0 left-0 w-full z-50 px-8 md:px-16 py-6 flex justify-between items-center bg-transparent backdrop-blur-md border-b border-white/5">
+                <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                        <span className="text-white font-black text-xl italic">T</span>
+                    </div>
+                    <h2 className="text-2xl font-black text-white tracking-tighter">
+                        MINI<span className="text-blue-500">TRAVEL.</span>
+                    </h2>
+                </div>
                 
-                {/* Logo with better typography */}
-                <h2 className="text-3xl font-extrabold text-white tracking-tighter">
-                    MINI<span className="text-blue-400">TRAVEL.</span>
-                </h2>
-                
-                {/* Nav Links with better styling */}
-                <div className="flex items-center space-x-3 md:space-x-6 font-semibold">
-                    <Link to="/login" className="text-white hover:text-blue-300 transition-colors duration-200">
+                <div className="flex items-center space-x-8 font-bold text-sm uppercase tracking-widest">
+                    <Link to="/login" className="text-slate-400 hover:text-white transition-colors">
                         Login
                     </Link>
                     <Link 
                         to="/register" 
-                        className="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-0.5"
+                        className="bg-white text-black px-8 py-3 rounded-full hover:bg-blue-500 hover:text-white transition-all shadow-xl active:scale-95"
                     >
-                        Sign Up
+                        Join Now
                     </Link>
                 </div>
             </nav>
 
-            {/* --- Hero Section (Now Full Screen 100vh) --- */}
-            <header className="relative h-screen flex items-center justify-center text-center text-white px-6">
-                
-                {/* Background Image - Covers 100% of the screen height */}
+            {/* --- Hero Section --- */}
+            <header className="relative h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+                {/* Background with subtle zoom animation */}
                 <div 
-                    className="absolute inset-0 bg-cover bg-center z-0" 
+                    className="absolute inset-0 bg-cover bg-center z-0 scale-105 animate-subtleZoom" 
                     style={{ backgroundImage: `url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=2074')` }}
                 >
-                    {/* Darker overlay for better text readability */}
-                    <div className="absolute inset-0 bg-black/50"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#020617]"></div>
                 </div>
 
-                {/* Content with animation and padding for Navbar */}
-                <div className="relative z-10 max-w-4xl mt-20 animate-fadeIn">
-                    <h1 className="text-6xl md:text-8xl font-black mb-6 leading-tight tracking-tighter">
-                        Escape to your <br /> 
-                        <span className="bg-linear-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">
-                            Dream Destination
+                <div className="relative z-10 max-w-5xl">
+                    <span className="inline-block px-4 py-1.5 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-[0.3em]">
+                        Explore the Unexplored
+                    </span>
+                    
+                    <h1 className="text-6xl md:text-9xl font-black text-white mb-8 leading-[0.85] tracking-tighter">
+                        Adventure <br /> 
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                            Awaits You
                         </span>
                     </h1>
                     
-                    <p className="text-xl md:text-2xl text-slate-200 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
-                        Plan, book, and explore the world with our all-in-one travel companion. 
-                        Your next adventure is just a click away.
+                    <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed opacity-80">
+                        Connect with local experience providers and discover unique travel stories. 
+                        Your journey to the world's most beautiful places starts here.
                     </p>
                     
-                    <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                         <Link 
                             to="/register" 
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4.5 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-2xl shadow-blue-600/30"
+                            className="group relative bg-blue-600 text-white px-12 py-5 rounded-2xl font-black text-lg transition-all hover:bg-blue-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.4)]"
                         >
-                            Start Planning Now 🌍
+                            Start Your Journey
+                            <span className="ml-2 group-hover:translate-x-2 transition-transform inline-block">→</span>
                         </Link>
+                        
+                        <div className="flex -space-x-4">
+                            {[1, 2, 3, 4].map((i) => (
+                                <img 
+                                    key={i}
+                                    className="w-12 h-12 rounded-full border-4 border-[#020617] object-cover"
+                                    src={`https://i.pravatar.cc/150?u=${i}`}
+                                    alt="User"
+                                />
+                            ))}
+                            <div className="w-12 h-12 rounded-full bg-slate-800 border-4 border-[#020617] flex items-center justify-center text-[10px] font-bold text-white">
+                                10k+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom Scroll Indicator */}
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+                    <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2">
+                        <div className="w-1 h-2 bg-blue-400 rounded-full"></div>
                     </div>
                 </div>
             </header>
 
-            
+            {/* --- Simple Feature Preview --- */}
+            <section className="py-24 px-8 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                    <div className="text-3xl mb-4">📍</div>
+                    <h4 className="text-xl font-bold text-white mb-2">Unique Locations</h4>
+                    <p className="text-slate-400">Hand-picked destinations from local experts around the globe.</p>
+                </div>
+                <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                    <div className="text-3xl mb-4">📸</div>
+                    <h4 className="text-xl font-bold text-white mb-2">Real Stories</h4>
+                    <p className="text-slate-400">See real photos and read experiences shared by our community.</p>
+                </div>
+                <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                    <div className="text-3xl mb-4">🛡️</div>
+                    <h4 className="text-xl font-bold text-white mb-2">Verified Hosts</h4>
+                    <p className="text-slate-400">We ensure every experience provider meets our quality standards.</p>
+                </div>
+            </section>
         </div>
     );
 };
-
-
 
 export default Home;
