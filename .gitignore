@@ -1,3 +1,21 @@
+# Dependencies
+node_modules/
 backend/node_modules/
-backend/.env
 frontend/node_modules/
+
+# Environment Variables (Security)
+.env
+backend/.env
+frontend/.env
+
+# Local Uploads
+backend/uploads/
+uploads/
+
+# Build folders
+dist/
+build/
+
+# IDE settings
+.vscode/
+.DS_Store
