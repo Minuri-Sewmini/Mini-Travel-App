@@ -12,7 +12,8 @@ const ListingDetail = () => {
     useEffect(() => {
         const fetchListing = async () => {
             try {
-                const res = await API.get(`api/listings/${id}`);
+                // මෙතන දැනටමත් /api/listings/${id} ලෙස නිවැරදිව පවතී
+                const res = await API.get(`/api/listings/${id}`);
                 setListing(res.data);
                 setLoading(false);
             } catch (err) {

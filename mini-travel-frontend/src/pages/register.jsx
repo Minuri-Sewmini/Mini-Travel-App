@@ -22,7 +22,7 @@ const Register = () => {
         }
 
         try {
-            const res = await API.post('api/users/register', formData);
+            const res = await API.post('/api/users/register', formData);
             
             if (res.data.token) {
                 localStorage.setItem('token', res.data.token);

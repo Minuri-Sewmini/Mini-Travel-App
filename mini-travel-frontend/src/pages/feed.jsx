@@ -13,10 +13,11 @@ const Feed = () => {
 
     const fetchListings = async (query = "") => {
         try {
-            
             if(!query) setLoading(true);
 
-            const endpoint = query ? `api/listings/search?query=${query}` : '/listings';
+            // FIXED PATHS: ඔයාගේ backend එකේ app.use('/api/listings', listingRoutes) ලෙස ඇති නිසා /api කොටස අනිවාර්යයි
+            const endpoint = query ? `/api/listings/search?query=${query}` : '/api/listings';
+            
             const res = await API.get(endpoint);
             setListings(res.data);
             setLoading(false);
@@ -29,12 +30,10 @@ const Feed = () => {
 
     // --- Live Search Logic (Debounce) ---
     useEffect(() => {
-        
         const delayDebounceFn = setTimeout(() => {
             fetchListings(searchQuery);
         }, 500); 
 
-        
         return () => clearTimeout(delayDebounceFn);
     }, [searchQuery]); 
 
@@ -98,7 +97,6 @@ const Feed = () => {
                         className="w-full bg-white/5 border border-white/10 rounded-[2rem] py-5 px-8 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all backdrop-blur-md"
                     />
                     <div className="absolute right-6 top-5 text-slate-500">
-                        
                         <span className="text-xl">🔍</span>
                     </div>
                 </div>

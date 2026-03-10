@@ -38,7 +38,8 @@ const CreateListing = () => {
         try {
             const token = localStorage.getItem('token');
 
-            await API.post('api/listings/create', data, {
+            // FIXED PATH: Backend එකේ app.use('/api/listings', listingRoutes) ලෙස ඇති බැවින් මෙය නිවැරදිය.
+            await API.post('/api/listings/create', data, {
                 headers: { 
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}` 
@@ -48,7 +49,6 @@ const CreateListing = () => {
             navigate('/feed');
         } catch (err) {
             console.error("Upload Error:", err);
-            // Specific check for bucket errors
             const errorMessage = err.response?.data?.message || "Check your internet or login session.";
             alert(`Error: ${errorMessage}`);
         } finally {
