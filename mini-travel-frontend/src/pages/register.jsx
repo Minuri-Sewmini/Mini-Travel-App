@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../api.js';
+import AuthNavbar from '../components/AuthNavbar'; // 1. AuthNavbar එක Import කළා
 
 const Register = () => {
     const navigate = useNavigate();
@@ -16,21 +17,17 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Front-end validation for password match
         if (formData.password !== formData.confirmPassword) {
             return alert("Passwords do not match!");
         }
 
         try {
-            // 1. Send registration request
             const res = await API.post('/users/register', formData);
             
-            // 2. Auto-login: If your backend returns a token upon registration
             if (res.data.token) {
                 localStorage.setItem('token', res.data.token);
-                navigate('/feed'); // Redirect straight to feed
+                navigate('/feed'); 
             } else {
-                // If backend doesn't return a token, go to login
                 alert("Account created! Please log in.");
                 navigate('/login');
             }
@@ -41,12 +38,16 @@ const Register = () => {
 
     return (
         <div className="relative flex justify-center items-center min-h-screen bg-[#020617] overflow-hidden p-6 font-sans">
+            
+            {/* --- Auth Navbar --- */}
+            <AuthNavbar /> {/* 2. Navbar එක මෙතනට දැම්මා */}
+
             {/* --- Animated Background Glows --- */}
             <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full animate-pulse"></div>
             <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
 
             {/* --- Register Card --- */}
-            <div className="relative z-10 bg-white/3 backdrop-blur-2xl p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border border-white/10">
+            <div className="relative z-10 bg-white/3 backdrop-blur-2xl p-10 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full max-w-2xl border border-white/10 mt-20">
                 
                 <div className="text-center mb-10">
                     <h2 className="text-4xl font-black text-white tracking-tight mb-3">
@@ -129,7 +130,7 @@ const Register = () => {
                     </div>
 
                     <button 
-                        className="w-full mt-6 bg-linear-to-r from-blue-600 to-blue-500 text-white p-5 rounded-2xl font-black text-lg shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300" 
+                        className="w-full mt-6 bg-linear-to-r from-blue-500 to-blue-500 text-white p-5 rounded-2xl font-black text-lg shadow-lg hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300" 
                         type="submit"
                     >
                         Create My Account

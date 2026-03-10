@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../api.js';
+import AuthNavbar from '../components/AuthNavbar.jsx';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Login = () => {
 
     return (
         <div className="relative flex justify-center items-center min-h-screen bg-[#020617] overflow-hidden p-6 font-sans">
+            <AuthNavbar/>
             {/* --- Animated Background Glows --- */}
             <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 blur-[120px] rounded-full animate-pulse"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
@@ -72,7 +74,7 @@ const Login = () => {
 
                     {/* Submit Button */}
                     <button 
-                        className="relative w-full mt-6 bg-linear-to-r from-blue-600 to-blue-500 text-white p-5 rounded-3xl font-black text-lg shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300" 
+                        className="relative w-full mt-6 bg-linear-to-r from-blue-500 to-blue-500 text-white p-5 rounded-3xl font-black text-lg shadow-[0_10px_30px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300" 
                         type="submit"
                     >
                         Sign In to Explore
