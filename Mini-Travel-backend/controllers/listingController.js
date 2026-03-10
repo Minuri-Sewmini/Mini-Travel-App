@@ -1,13 +1,44 @@
+import { createClient } from '@supabase/supabase-js';
 import Listing from '../models/listing.js';
 import User from '../models/user.js';
+import dotenv from 'dotenv';
 
-// --- Create a New Listing ---
+dotenv.config();
+
+// Initialize Supabase Client
+const supabase = createClient(
+    process.env.SUPABASE_URL, 
+    process.env.SUPABASE_ANON_KEY 
+);
+
+// --- 1. Create a New Listing with Supabase Upload ---
 export const createListing = async (req, res) => {
     try {
-        const { title, location, description, imageUrl, price } = req.body;
-
-        // Fetch the user to get the username for the listing
+        const { title, location, description, price } = req.body;
         const user = await User.findById(req.userId);
+
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        let imageUrl = "";
+
+        if (req.file) {
+            const fileName = `${Date.now()}_${req.file.originalname}`;
+            
+            const { data, error } = await supabase.storage
+                .from('minitravel') 
+                .upload(fileName, req.file.buffer, {
+                    contentType: req.file.mimetype,
+                    upsert: false
+                });
+
+            if (error) throw error;
+
+            const { data: publicUrlData } = supabase.storage
+                .from('minitravel')
+                .getPublicUrl(fileName);
+
+            imageUrl = publicUrlData.publicUrl;
+        }
 
         const newListing = new Listing({
             title,
@@ -16,7 +47,7 @@ export const createListing = async (req, res) => {
             imageUrl,
             price,
             creator: req.userId,
-            creatorName: user.username // Requirement: Display creator name on the feed
+            creatorName: user.username
         });
 
         const savedListing = await newListing.save();
@@ -26,10 +57,9 @@ export const createListing = async (req, res) => {
     }
 };
 
-// --- Get All Listings (Public Feed) ---
+// --- 2. Get All Listings (For Public Feed) ---
 export const getAllListings = async (req, res) => {
     try {
-        // Sort by createdAt descending (-1) to show newest listings first
         const listings = await Listing.find().sort({ createdAt: -1 });
         res.status(200).json(listings);
     } catch (err) {
@@ -37,53 +67,67 @@ export const getAllListings = async (req, res) => {
     }
 };
 
-// --- Update an Existing Listing ---
-export const updateListing = async (req, res) => {
+// --- 3. Get a Single Listing by ID (For Detail Page) ---
+// මෙම කොටස අලුතින් එකතු කරන ලදී. එවිට 404 error එක විසඳේ.
+export const getListingById = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, location, description, imageUrl, price } = req.body;
-
         const listing = await Listing.findById(id);
 
         if (!listing) {
             return res.status(404).json({ message: "Listing not found" });
         }
 
-        // Security: Check if the logged-in user is the owner of the listing
-        if (listing.creator.toString() !== req.userId) {
-            return res.status(403).json({ message: "Unauthorized: You can only update your own listings" });
+        res.status(200).json(listing);
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching listing: " + err.message });
+    }
+};
+
+// --- 4. Update Listing with Supabase ---
+export const updateListing = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, location, description, price } = req.body;
+        const listing = await Listing.findById(id);
+
+        if (!listing) return res.status(404).json({ message: "Listing not found" });
+        if (listing.creator.toString() !== req.userId) return res.status(403).json({ message: "Unauthorized" });
+
+        let imageUrl = listing.imageUrl;
+        if (req.file) {
+            const fileName = `${Date.now()}_${req.file.originalname}`;
+            
+            const { error } = await supabase.storage
+                .from('minitravel')
+                .upload(fileName, req.file.buffer, { contentType: req.file.mimetype });
+
+            if (error) throw error;
+            imageUrl = supabase.storage.from('minitravel').getPublicUrl(fileName).data.publicUrl;
         }
 
         const updatedListing = await Listing.findByIdAndUpdate(
             id,
             { title, location, description, imageUrl, price },
-            { new: true } // Return the updated document
+            { new: true }
         );
-
         res.status(200).json(updatedListing);
     } catch (err) {
-        res.status(500).json({ message: "Error updating listing: " + err.message });
+        res.status(500).json({ message: "Error updating: " + err.message });
     }
 };
 
-// --- Delete a Listing ---
+// --- 5. Delete Listing ---
 export const deleteListing = async (req, res) => {
     try {
         const { id } = req.params;
         const listing = await Listing.findById(id);
-
-        if (!listing) {
-            return res.status(404).json({ message: "Listing not found" });
-        }
-
-        // Security: Check if the logged-in user is the owner
-        if (listing.creator.toString() !== req.userId) {
-            return res.status(403).json({ message: "Unauthorized: You can only delete your own listings" });
-        }
+        if (!listing) return res.status(404).json({ message: "Listing not found" });
+        if (listing.creator.toString() !== req.userId) return res.status(403).json({ message: "Unauthorized" });
 
         await Listing.findByIdAndDelete(id);
         res.status(200).json({ message: "Listing deleted successfully" });
     } catch (err) {
-        res.status(500).json({ message: "Error deleting listing: " + err.message });
+        res.status(500).json({ message: "Error deleting: " + err.message });
     }
 };
