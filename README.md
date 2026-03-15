@@ -56,7 +56,7 @@ To keep users coming back to **Mini-Travel**, I propose the following features b
 
 ---
 
-**Developed by Minuri Sewmini** ```
+**Developed by Minuri Sewmini**
 
 
 
